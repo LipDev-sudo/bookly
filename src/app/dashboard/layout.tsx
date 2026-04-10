@@ -5,6 +5,7 @@ import {
   Users,
   Briefcase,
   LayoutDashboard,
+  CreditCard,
   LogOut,
 } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -50,6 +51,9 @@ export default async function DashboardLayout({
           </NavItem>
           <NavItem href="/dashboard/services" icon={<Briefcase className="h-4 w-4" />}>
             Services
+          </NavItem>
+          <NavItem href="/dashboard/billing" icon={<CreditCard className="h-4 w-4" />}>
+            Billing
           </NavItem>
         </nav>
         <div className="border-t border-border p-4">
