@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CalendarDays, Users, BarChart3, ArrowRight } from "lucide-react";
+import { DemoButton } from "@/components/demo-button";
 
 export default function LandingPage() {
   return (
@@ -49,12 +50,7 @@ export default function LandingPage() {
           >
             Start free <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link
-            href="/login"
-            className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 font-medium hover:bg-muted"
-          >
-            Sign in
-          </Link>
+          <DemoButton />
         </div>
       </section>
 
