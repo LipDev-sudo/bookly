@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
+import { Loader2 } from "lucide-react";
 import type { ServiceFormState } from "../actions";
 
 type Defaults = {
@@ -110,13 +111,14 @@ export function ServiceForm({
         <button
           type="submit"
           disabled={pending}
-          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
         >
+          {pending && <Loader2 className="h-4 w-4 animate-spin" />}
           {pending ? pendingLabel : submitLabel}
         </button>
         <Link
           href="/dashboard/services"
-          className="rounded-md border border-border px-4 py-2 text-sm hover:bg-muted"
+          className="rounded-md border border-border px-4 py-2 text-sm transition-colors hover:bg-muted"
         >
           Cancel
         </Link>

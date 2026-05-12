@@ -1,9 +1,17 @@
 import Link from "next/link";
-import { Plus, Mail, Phone, Pencil, Trash2, Users } from "lucide-react";
+import { Plus, Mail, Phone, Pencil, Users } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { deleteClientAction } from "./actions";
+import { DeleteButton } from "@/components/delete-button";
+import { FlashToast } from "@/components/flash-toast";
 
-export default async function ClientsPage() {
+export default async function ClientsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ toast?: string }>;
+}) {
+  const { toast } = await searchParams;
+
   const supabase = await createSupabaseServerClient();
 
   const { data: clients } = await supabase
@@ -13,6 +21,8 @@ export default async function ClientsPage() {
 
   return (
     <div className="p-6 sm:p-10">
+      <FlashToast message={toast} />
+
       <header className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Clients</h1>
@@ -22,7 +32,7 @@ export default async function ClientsPage() {
         </div>
         <Link
           href="/dashboard/clients/new"
-          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
         >
           <Plus className="h-4 w-4" /> New client
         </Link>
@@ -35,41 +45,36 @@ export default async function ClientsPage() {
           {clients.map((c) => (
             <article
               key={c.id}
-              className="flex flex-col gap-3 rounded-lg border border-border bg-card p-5"
+              className="flex flex-col gap-3 rounded-lg border border-border bg-card p-5 transition-shadow hover:shadow-sm"
             >
               <header className="flex items-start justify-between">
                 <h2 className="text-lg font-semibold">{c.name}</h2>
                 <div className="flex items-center gap-1">
                   <Link
                     href={`/dashboard/clients/${c.id}/edit`}
-                    className="rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+                    className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                     aria-label={`Edit ${c.name}`}
                   >
                     <Pencil className="h-4 w-4" />
                   </Link>
-                  <form action={deleteClientAction}>
-                    <input type="hidden" name="id" value={c.id} />
-                    <button
-                      type="submit"
-                      className="rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-destructive"
-                      aria-label={`Delete ${c.name}`}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </form>
+                  <DeleteButton
+                    action={deleteClientAction}
+                    id={c.id}
+                    label={c.name}
+                  />
                 </div>
               </header>
 
               <div className="space-y-1.5 text-sm text-muted-foreground">
                 {c.email && (
                   <div className="flex items-center gap-2">
-                    <Mail className="h-3.5 w-3.5" />
+                    <Mail className="h-3.5 w-3.5 shrink-0" />
                     <span className="truncate">{c.email}</span>
                   </div>
                 )}
                 {c.phone && (
                   <div className="flex items-center gap-2">
-                    <Phone className="h-3.5 w-3.5" />
+                    <Phone className="h-3.5 w-3.5 shrink-0" />
                     <span>{c.phone}</span>
                   </div>
                 )}
@@ -98,7 +103,7 @@ function EmptyState() {
       </p>
       <Link
         href="/dashboard/clients/new"
-        className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+        className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
       >
         <Plus className="h-4 w-4" /> Add your first client
       </Link>

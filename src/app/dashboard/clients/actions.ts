@@ -101,7 +101,7 @@ export async function createClientAction(
 
   revalidatePath("/dashboard/clients");
   revalidatePath("/dashboard");
-  redirect("/dashboard/clients");
+  redirect("/dashboard/clients?toast=created");
 }
 
 export async function updateClientAction(
@@ -128,7 +128,7 @@ export async function updateClientAction(
   if (error) return { error: error.message };
 
   revalidatePath("/dashboard/clients");
-  redirect("/dashboard/clients");
+  redirect("/dashboard/clients?toast=updated");
 }
 
 export async function deleteClientAction(formData: FormData) {
@@ -140,4 +140,5 @@ export async function deleteClientAction(formData: FormData) {
 
   revalidatePath("/dashboard/clients");
   revalidatePath("/dashboard");
+  redirect("/dashboard/clients?toast=deleted");
 }

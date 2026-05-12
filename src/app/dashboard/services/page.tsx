@@ -1,10 +1,18 @@
 import Link from "next/link";
-import { Plus, Clock, Pencil, Trash2, Briefcase } from "lucide-react";
+import { Plus, Clock, Pencil, Briefcase } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { formatCurrency } from "@/lib/utils";
 import { deleteServiceAction } from "./actions";
+import { DeleteButton } from "@/components/delete-button";
+import { FlashToast } from "@/components/flash-toast";
 
-export default async function ServicesPage() {
+export default async function ServicesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ toast?: string }>;
+}) {
+  const { toast } = await searchParams;
+
   const supabase = await createSupabaseServerClient();
 
   const { data: services } = await supabase
@@ -14,6 +22,8 @@ export default async function ServicesPage() {
 
   return (
     <div className="p-6 sm:p-10">
+      <FlashToast message={toast} />
+
       <header className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Services</h1>
@@ -23,7 +33,7 @@ export default async function ServicesPage() {
         </div>
         <Link
           href="/dashboard/services/new"
-          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
         >
           <Plus className="h-4 w-4" /> New service
         </Link>
@@ -36,7 +46,7 @@ export default async function ServicesPage() {
           {services.map((s) => (
             <article
               key={s.id}
-              className="flex flex-col gap-3 rounded-lg border border-border bg-card p-5"
+              className="flex flex-col gap-3 rounded-lg border border-border bg-card p-5 transition-shadow hover:shadow-sm"
             >
               <header className="flex items-start justify-between">
                 <div className="flex-1">
@@ -50,21 +60,16 @@ export default async function ServicesPage() {
                 <div className="flex items-center gap-1">
                   <Link
                     href={`/dashboard/services/${s.id}/edit`}
-                    className="rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+                    className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                     aria-label={`Edit ${s.name}`}
                   >
                     <Pencil className="h-4 w-4" />
                   </Link>
-                  <form action={deleteServiceAction}>
-                    <input type="hidden" name="id" value={s.id} />
-                    <button
-                      type="submit"
-                      className="rounded-md p-2 text-muted-foreground hover:bg-muted hover:text-destructive"
-                      aria-label={`Delete ${s.name}`}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </form>
+                  <DeleteButton
+                    action={deleteServiceAction}
+                    id={s.id}
+                    label={s.name}
+                  />
                 </div>
               </header>
 
@@ -100,7 +105,7 @@ function EmptyState() {
       </p>
       <Link
         href="/dashboard/services/new"
-        className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+        className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
       >
         <Plus className="h-4 w-4" /> Add your first service
       </Link>
