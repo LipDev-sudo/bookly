@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { logoutAction } from "../(auth)/actions";
 import { Sidebar } from "@/components/sidebar";
+import { ChatPanel } from "@/components/chat-panel";
 
 export default async function DashboardLayout({
   children,
@@ -31,6 +32,7 @@ export default async function DashboardLayout({
         logoutAction={logoutAction}
       />
       <main className="flex-1 overflow-y-auto">{children}</main>
+      <ChatPanel />
     </div>
   );
 }
