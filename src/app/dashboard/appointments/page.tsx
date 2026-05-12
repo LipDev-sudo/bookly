@@ -4,13 +4,14 @@ import {
   CalendarDays,
   Clock,
   Pencil,
-  Trash2,
   User,
   Briefcase,
 } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { formatCurrency } from "@/lib/utils";
 import { deleteAppointmentAction } from "./actions";
+import { DeleteButton } from "@/components/delete-button";
+import { FlashToast } from "@/components/flash-toast";
 
 const STATUS_BADGE: Record<string, string> = {
   scheduled:
@@ -22,7 +23,13 @@ const STATUS_BADGE: Record<string, string> = {
     "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
 };
 
-export default async function AppointmentsPage() {
+export default async function AppointmentsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ toast?: string }>;
+}) {
+  const { toast } = await searchParams;
+
   const supabase = await createSupabaseServerClient();
 
   const { data: appointments } = await supabase
@@ -37,6 +44,8 @@ export default async function AppointmentsPage() {
 
   return (
     <div className="p-6 sm:p-10">
+      <FlashToast message={toast} />
+
       <header className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Appointments</h1>
@@ -46,7 +55,7 @@ export default async function AppointmentsPage() {
         </div>
         <Link
           href="/dashboard/appointments/new"
-          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
         >
           <Plus className="h-4 w-4" /> New appointment
         </Link>
@@ -59,7 +68,7 @@ export default async function AppointmentsPage() {
           <table className="w-full text-left text-sm">
             <thead className="border-b border-border bg-muted/50">
               <tr>
-                <th className="px-4 py-3 font-medium">Date & time</th>
+                <th className="px-4 py-3 font-medium">Date &amp; time</th>
                 <th className="px-4 py-3 font-medium">Client</th>
                 <th className="px-4 py-3 font-medium">Service</th>
                 <th className="px-4 py-3 font-medium">Duration</th>
@@ -79,7 +88,7 @@ export default async function AppointmentsPage() {
                 } | null;
 
                 return (
-                  <tr key={a.id} className="hover:bg-muted/30">
+                  <tr key={a.id} className="transition-colors hover:bg-muted/30">
                     <td className="whitespace-nowrap px-4 py-3">
                       <div className="flex items-center gap-2">
                         <CalendarDays className="h-4 w-4 text-muted-foreground" />
@@ -134,21 +143,16 @@ export default async function AppointmentsPage() {
                       <div className="flex items-center gap-1">
                         <Link
                           href={`/dashboard/appointments/${a.id}/edit`}
-                          className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                          className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                           aria-label="Edit appointment"
                         >
                           <Pencil className="h-4 w-4" />
                         </Link>
-                        <form action={deleteAppointmentAction}>
-                          <input type="hidden" name="id" value={a.id} />
-                          <button
-                            type="submit"
-                            className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-destructive"
-                            aria-label="Delete appointment"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
-                        </form>
+                        <DeleteButton
+                          action={deleteAppointmentAction}
+                          id={a.id}
+                          label={`appointment on ${start.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`}
+                        />
                       </div>
                     </td>
                   </tr>
@@ -172,7 +176,7 @@ function EmptyState() {
       </p>
       <Link
         href="/dashboard/appointments/new"
-        className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+        className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
       >
         <Plus className="h-4 w-4" /> Schedule appointment
       </Link>

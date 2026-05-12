@@ -126,7 +126,7 @@ export async function createAppointmentAction(
 
   revalidatePath("/dashboard/appointments");
   revalidatePath("/dashboard");
-  redirect("/dashboard/appointments");
+  redirect("/dashboard/appointments?toast=created");
 }
 
 export async function updateAppointmentAction(
@@ -161,7 +161,7 @@ export async function updateAppointmentAction(
   if (error) return { error: error.message };
 
   revalidatePath("/dashboard/appointments");
-  redirect("/dashboard/appointments");
+  redirect("/dashboard/appointments?toast=updated");
 }
 
 export async function deleteAppointmentAction(formData: FormData) {
@@ -173,4 +173,5 @@ export async function deleteAppointmentAction(formData: FormData) {
 
   revalidatePath("/dashboard/appointments");
   revalidatePath("/dashboard");
+  redirect("/dashboard/appointments?toast=deleted");
 }

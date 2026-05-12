@@ -105,7 +105,7 @@ export async function createServiceAction(
 
   revalidatePath("/dashboard/services");
   revalidatePath("/dashboard");
-  redirect("/dashboard/services");
+  redirect("/dashboard/services?toast=created");
 }
 
 export async function updateServiceAction(
@@ -133,7 +133,7 @@ export async function updateServiceAction(
   if (error) return { error: error.message };
 
   revalidatePath("/dashboard/services");
-  redirect("/dashboard/services");
+  redirect("/dashboard/services?toast=updated");
 }
 
 export async function deleteServiceAction(formData: FormData) {
@@ -145,4 +145,5 @@ export async function deleteServiceAction(formData: FormData) {
 
   revalidatePath("/dashboard/services");
   revalidatePath("/dashboard");
+  redirect("/dashboard/services?toast=deleted");
 }
