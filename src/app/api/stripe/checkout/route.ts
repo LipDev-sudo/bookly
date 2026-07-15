@@ -1,10 +1,18 @@
 import { NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const PRICE_ID = "price_1TKTj9AWFFFF8w2gRhlVno3E";
 
 export async function POST() {
+  let stripe;
+  try {
+    stripe = getStripe();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Stripe is unavailable.";
+    return NextResponse.json({ error: message }, { status: 503 });
+  }
+
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },

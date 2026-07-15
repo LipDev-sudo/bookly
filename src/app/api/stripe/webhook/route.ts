@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { createSupabaseAdminClient } from "@/lib/supabase/server";
 
 export async function POST(request: NextRequest) {
@@ -9,19 +9,36 @@ export async function POST(request: NextRequest) {
 
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
+  if (!webhookSecret) {
+    return NextResponse.json(
+      { error: "Stripe webhook is not configured." },
+      { status: 503 },
+    );
+  }
+
+  if (!sig) {
+    return NextResponse.json(
+      { error: "Missing Stripe signature." },
+      { status: 400 },
+    );
+  }
+
+  let stripe;
+  try {
+    stripe = getStripe();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Stripe is unavailable.";
+    return NextResponse.json({ error: message }, { status: 503 });
+  }
+
   let event: Stripe.Event;
 
-  if (webhookSecret && sig) {
-    try {
-      event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Unknown error";
-      console.error(`Webhook signature verification failed: ${message}`);
-      return NextResponse.json({ error: message }, { status: 400 });
-    }
-  } else {
-    // In development without webhook secret, parse the event directly.
-    event = JSON.parse(body) as Stripe.Event;
+  try {
+    event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error(`Webhook signature verification failed: ${message}`);
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 
   const supabase = createSupabaseAdminClient();

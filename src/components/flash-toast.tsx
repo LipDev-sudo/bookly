@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CheckCircle2, X } from "lucide-react";
 
 const LABELS: Record<string, string> = {
@@ -13,22 +13,20 @@ export function FlashToast({ message }: { message?: string }) {
   const [visible, setVisible] = useState(!!message);
   const closedRef = useRef(false);
 
-  useEffect(() => {
-    if (!message) return;
-    setVisible(true);
-    closedRef.current = false;
-    const t = setTimeout(close, 3500);
-    return () => clearTimeout(t);
-  }, [message]);
-
-  function close() {
+  const close = useCallback(() => {
     if (closedRef.current) return;
     closedRef.current = true;
     setVisible(false);
     const url = new URL(window.location.href);
     url.searchParams.delete("toast");
     window.history.replaceState({}, "", url.toString());
-  }
+  }, []);
+
+  useEffect(() => {
+    if (!message) return;
+    const t = setTimeout(close, 3500);
+    return () => clearTimeout(t);
+  }, [close, message]);
 
   if (!visible || !message) return null;
 
