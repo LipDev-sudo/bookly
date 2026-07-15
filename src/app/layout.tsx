@@ -14,9 +14,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bookly — Booking & client management for service businesses",
+  title: {
+    default: "Bookly | Scheduling and client management",
+    template: "%s | Bookly",
+  },
   description:
-    "Lightweight scheduling and CRM for barbershops, salons, trainers and small service businesses. Built by LipDev.",
+    "A scheduling and client management application for small service businesses, with a public interactive demo.",
+  applicationName: "Bookly",
+  keywords: ["appointment scheduling", "client management", "service business", "CRM"],
+  openGraph: {
+    type: "website",
+    title: "Bookly | Scheduling and client management",
+    description: "Explore scheduling, clients and services through a public demo with fictional local data.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

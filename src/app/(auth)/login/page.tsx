@@ -64,6 +64,12 @@ export default function LoginPage() {
           Sign up
         </Link>
       </p>
+      <p className="mt-3 text-center text-sm text-muted-foreground">
+        Want to evaluate Bookly without an account?{" "}
+        <Link href="/demo" className="font-medium text-primary hover:underline">
+          Open the local demo
+        </Link>
+      </p>
     </>
   );
 }
