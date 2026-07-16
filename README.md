@@ -4,6 +4,9 @@
 
 Horavia é uma demonstração de produto para organização de agenda, clientes e serviços em pequenos negócios de atendimento. A experiência pública usa o Estúdio Aurora, um negócio fictício de cabelo e beleza, para apresentar um fluxo coerente sem exigir cadastro ou credenciais externas.
 
+- **Demonstração:** [https://horavia-lip-dev.vercel.app](https://horavia-lip-dev.vercel.app)
+- **Repositório:** [https://github.com/LipDev-sudo/horavia](https://github.com/LipDev-sudo/horavia)
+
 > Projeto demonstrativo de portfólio. Os nomes, contatos, horários e valores exibidos são fictícios e não representam clientes ou resultados comerciais reais.
 
 ## Demonstração interativa
@@ -40,6 +43,8 @@ Execute o projeto e acesse [`/demo`](http://localhost:3000/demo). A demonstraç�
 ## Execução local
 
 ```bash
+git clone https://github.com/LipDev-sudo/horavia.git
+cd horavia
 npm ci
 npm run dev
 ```
