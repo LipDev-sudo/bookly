@@ -14,6 +14,7 @@ import {
   Users,
 } from "lucide-react";
 import {
+  createEmptyDemoState,
   createDemoState,
   DEMO_STORAGE_KEY,
   type DemoAppointment,
@@ -78,7 +79,7 @@ export function DemoDashboard() {
   }
 
   function clearDemo() {
-    updateDemoStorage({ appointments: [], clients: [], services: [] });
+    updateDemoStorage(createEmptyDemoState());
   }
 
   function completeNextAppointment() {
