@@ -9,7 +9,7 @@ export async function POST() {
   try {
     stripe = getStripe();
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Stripe is unavailable.";
+    const message = error instanceof Error ? error.message : "A Stripe está indisponível.";
     return NextResponse.json({ error: message }, { status: 503 });
   }
 
@@ -19,7 +19,7 @@ export async function POST() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    return NextResponse.json({ error: "Conta não autenticada" }, { status: 401 });
   }
 
   const { data: business } = await supabase
@@ -29,7 +29,7 @@ export async function POST() {
     .maybeSingle();
 
   if (!business) {
-    return NextResponse.json({ error: "No business found" }, { status: 404 });
+    return NextResponse.json({ error: "Negócio não encontrado" }, { status: 404 });
   }
 
   // Reuse or create Stripe customer

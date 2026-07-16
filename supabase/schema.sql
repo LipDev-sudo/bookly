@@ -1,5 +1,5 @@
 -- ============================================================
--- Bookly — database schema
+-- Horavia — database schema
 -- Copy this entire file and run in:
 --   Supabase Dashboard → SQL Editor → New query → Run
 -- ============================================================

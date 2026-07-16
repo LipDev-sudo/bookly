@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_SLOGAN,
+  SITE_URL,
+} from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,18 +20,32 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Bookly | Scheduling and client management",
-    template: "%s | Bookly",
+    default: `${SITE_NAME} | Agenda e gestão de atendimentos`,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "A scheduling and client management application for small service businesses, with a public interactive demo.",
-  applicationName: "Bookly",
-  keywords: ["appointment scheduling", "client management", "service business", "CRM"],
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "agenda de atendimentos",
+    "gestão de clientes",
+    "serviços",
+    "pequenos negócios",
+  ],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    title: "Bookly | Scheduling and client management",
-    description: "Explore scheduling, clients and services through a public demo with fictional local data.",
+    locale: "pt_BR",
+    url: "/",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} | ${SITE_SLOGAN}`,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} | ${SITE_SLOGAN}`,
+    description: SITE_DESCRIPTION,
   },
   robots: { index: true, follow: true },
 };
@@ -37,11 +57,11 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

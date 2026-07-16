@@ -14,8 +14,8 @@ import {
 } from "./_components/revenue-chart";
 
 const MONTH_NAMES = [
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+  "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+  "Jul", "Ago", "Set", "Out", "Nov", "Dez",
 ];
 
 export default async function DashboardOverviewPage() {
@@ -87,9 +87,9 @@ export default async function DashboardOverviewPage() {
   return (
     <div className="p-6 sm:p-10">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold">Overview</h1>
+        <h1 className="text-3xl font-bold">Visão geral</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Welcome back to {business?.name ?? "your business"}.
+          Acompanhe o dia de {business?.name ?? "seu negócio"}.
         </p>
       </header>
 
@@ -97,22 +97,22 @@ export default async function DashboardOverviewPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           icon={<DollarSign className="h-5 w-5 text-primary" />}
-          label="Revenue this month"
+          label="Receita no mês"
           value={formatCurrency(monthlyRevenue)}
         />
         <StatCard
           icon={<CalendarDays className="h-5 w-5 text-primary" />}
-          label="Appointments"
+          label="Agendamentos"
           value={String(appointmentsCount ?? 0)}
         />
         <StatCard
           icon={<Users className="h-5 w-5 text-primary" />}
-          label="Clients"
+          label="Clientes"
           value={String(clientsCount ?? 0)}
         />
         <StatCard
           icon={<Briefcase className="h-5 w-5 text-primary" />}
-          label="Services"
+          label="Serviços"
           value={String(servicesCount ?? 0)}
         />
       </div>
@@ -120,7 +120,7 @@ export default async function DashboardOverviewPage() {
       {/* Revenue chart */}
       <section className="mt-8 rounded-lg border border-border bg-card p-6">
         <h2 className="mb-4 text-lg font-semibold">
-          Revenue — {now.getFullYear()}
+          Receita — {now.getFullYear()}
         </h2>
         <RevenueChart data={chartData} />
       </section>
@@ -128,23 +128,23 @@ export default async function DashboardOverviewPage() {
       {/* Upcoming appointments */}
       <section className="mt-8 rounded-lg border border-border bg-card p-6">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Upcoming</h2>
+          <h2 className="text-lg font-semibold">Próximos horários</h2>
           <Link
             href="/dashboard/appointments"
             className="flex items-center gap-1 text-sm text-primary hover:underline"
           >
-            View all <ArrowRight className="h-3.5 w-3.5" />
+            Ver agenda <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
 
         {!upcomingAppointments || upcomingAppointments.length === 0 ? (
           <p className="text-sm text-muted-foreground">
-            No upcoming appointments.{" "}
+            Nenhum horário futuro.{" "}
             <Link
               href="/dashboard/appointments/new"
               className="text-primary hover:underline"
             >
-              Schedule one
+              Agendar atendimento
             </Link>
           </p>
         ) : (
@@ -163,11 +163,11 @@ export default async function DashboardOverviewPage() {
                     </span>
                   </div>
                   <span className="text-muted-foreground">
-                    {start.toLocaleDateString("en-US", {
+                    {start.toLocaleDateString("pt-BR", {
                       month: "short",
                       day: "numeric",
                     })}{" "}
-                    {start.toLocaleTimeString("en-US", {
+                    {start.toLocaleTimeString("pt-BR", {
                       hour: "2-digit",
                       minute: "2-digit",
                     })}

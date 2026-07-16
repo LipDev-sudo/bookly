@@ -13,7 +13,7 @@ export function DeleteButton({ action, id, label }: Props) {
   const [pending, startTransition] = useTransition();
 
   function handleClick() {
-    if (!confirm(`Delete "${label}"? This cannot be undone.`)) return;
+    if (!confirm(`Excluir “${label}”? Esta ação não pode ser desfeita.`)) return;
     const fd = new FormData();
     fd.set("id", id);
     startTransition(() => action(fd));
@@ -25,7 +25,7 @@ export function DeleteButton({ action, id, label }: Props) {
       onClick={handleClick}
       disabled={pending}
       className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-destructive disabled:opacity-50"
-      aria-label={`Delete ${label}`}
+      aria-label={`Excluir ${label}`}
     >
       {pending ? (
         <Loader2 className="h-4 w-4 animate-spin" />

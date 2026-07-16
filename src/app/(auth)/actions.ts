@@ -14,7 +14,7 @@ export async function loginAction(
   const password = String(formData.get("password") ?? "");
 
   if (!email || !password) {
-    return { error: "Email and password are required." };
+    return { error: "Informe email e senha." };
   }
 
   const supabase = await createSupabaseServerClient();
@@ -37,10 +37,10 @@ export async function signupAction(
   const businessName = String(formData.get("business_name") ?? "").trim();
 
   if (!email || !password || !businessName) {
-    return { error: "All fields are required." };
+    return { error: "Preencha todos os campos." };
   }
   if (password.length < 6) {
-    return { error: "Password must be at least 6 characters." };
+    return { error: "A senha deve ter pelo menos 6 caracteres." };
   }
 
   const supabase = await createSupabaseServerClient();

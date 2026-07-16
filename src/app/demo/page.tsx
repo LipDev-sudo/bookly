@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { DemoDashboard } from "@/components/demo-dashboard";
+import { DemoDashboard } from "@/components/demo/demo-dashboard";
 
 export const metadata: Metadata = {
-  title: "Interactive demo | Bookly",
-  description: "Explore Bookly with fictional local data and no account or credentials.",
+  title: "Demonstração interativa",
+  description:
+    "Explore a Horavia com dados fictícios locais, sem cadastro ou credenciais externas.",
+  alternates: { canonical: "/demo" },
 };
 
 export default function DemoPage() {

@@ -25,36 +25,36 @@ export default async function NewAppointmentPage() {
         href="/dashboard/appointments"
         className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >
-        <ArrowLeft className="h-4 w-4" /> Back to appointments
+        <ArrowLeft className="h-4 w-4" /> Voltar para a agenda
       </Link>
 
       <header className="mb-8">
-        <h1 className="text-3xl font-bold">New appointment</h1>
+        <h1 className="text-3xl font-bold">Novo agendamento</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Pick a client, service, date and time.
+          Escolha cliente, serviço, data e horário.
         </p>
       </header>
 
       {(!clients || clients.length === 0) && (
         <div className="mb-6 rounded-md border border-border bg-muted p-4 text-sm text-muted-foreground">
-          You need to{" "}
+          É necessário{" "}
           <Link href="/dashboard/clients/new" className="text-primary underline">
-            add a client
+            adicionar um cliente
           </Link>{" "}
-          before scheduling an appointment.
+          antes de criar um agendamento.
         </div>
       )}
 
       {(!services || services.length === 0) && (
         <div className="mb-6 rounded-md border border-border bg-muted p-4 text-sm text-muted-foreground">
-          You need to{" "}
+          É necessário{" "}
           <Link
             href="/dashboard/services/new"
             className="text-primary underline"
           >
-            create a service
+            criar um serviço
           </Link>{" "}
-          before scheduling an appointment.
+          antes de criar um agendamento.
         </div>
       )}
 
@@ -63,8 +63,8 @@ export default async function NewAppointmentPage() {
           action={createAppointmentAction}
           clients={clients ?? []}
           services={services ?? []}
-          submitLabel="Schedule"
-          pendingLabel="Scheduling..."
+          submitLabel="Agendar"
+          pendingLabel="Agendando..."
         />
       </div>
     </div>

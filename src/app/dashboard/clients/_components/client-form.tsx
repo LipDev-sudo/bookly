@@ -37,7 +37,7 @@ export function ClientForm({
       {hiddenId && <input type="hidden" name="id" value={hiddenId} />}
       <Field
         id="name"
-        label="Name"
+        label="Nome"
         required
         defaultValue={defaults?.name ?? ""}
         error={state?.fieldErrors?.name}
@@ -51,13 +51,13 @@ export function ClientForm({
       />
       <Field
         id="phone"
-        label="Phone"
+        label="Telefone"
         defaultValue={defaults?.phone ?? ""}
         error={state?.fieldErrors?.phone}
       />
       <div>
         <label htmlFor="notes" className="mb-1 block text-sm font-medium">
-          Notes
+          Observações
         </label>
         <textarea
           id="notes"
@@ -88,7 +88,7 @@ export function ClientForm({
           href="/dashboard/clients"
           className="rounded-md border border-border px-4 py-2 text-sm transition-colors hover:bg-muted"
         >
-          Cancel
+          Cancelar
         </Link>
       </div>
     </form>

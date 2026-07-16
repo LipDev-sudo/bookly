@@ -1,6 +1,6 @@
 export default function DemoLoading() {
   return (
-    <main className="min-h-screen bg-background p-6" aria-busy="true" aria-label="Loading demo">
+    <main className="min-h-screen bg-background p-6" aria-busy="true" aria-label="Carregando demonstração">
       <div className="mx-auto max-w-6xl animate-pulse space-y-6">
         <div className="h-12 w-48 rounded-lg bg-muted" />
         <div className="grid gap-4 sm:grid-cols-3">

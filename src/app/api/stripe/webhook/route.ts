@@ -11,14 +11,14 @@ export async function POST(request: NextRequest) {
 
   if (!webhookSecret) {
     return NextResponse.json(
-      { error: "Stripe webhook is not configured." },
+      { error: "O webhook da Stripe não está configurado." },
       { status: 503 },
     );
   }
 
   if (!sig) {
     return NextResponse.json(
-      { error: "Missing Stripe signature." },
+      { error: "Assinatura do Stripe ausente." },
       { status: 400 },
     );
   }
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
   try {
     stripe = getStripe();
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Stripe is unavailable.";
+    const message = error instanceof Error ? error.message : "A Stripe está indisponível.";
     return NextResponse.json({ error: message }, { status: 503 });
   }
 
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
   try {
     event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Unknown error";
+    const message = err instanceof Error ? err.message : "Erro desconhecido";
     console.error(`Webhook signature verification failed: ${message}`);
     return NextResponse.json({ error: message }, { status: 400 });
   }

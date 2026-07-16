@@ -11,18 +11,18 @@ import {
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { href: "/dashboard", label: "Overview", icon: LayoutDashboard, exact: true },
-  { href: "/dashboard/appointments", label: "Appointments", icon: CalendarDays },
-  { href: "/dashboard/clients", label: "Clients", icon: Users },
-  { href: "/dashboard/services", label: "Services", icon: Briefcase },
-  { href: "/dashboard/billing", label: "Billing", icon: CreditCard },
+  { href: "/dashboard", label: "Visão geral", icon: LayoutDashboard, exact: true },
+  { href: "/dashboard/appointments", label: "Agenda", icon: CalendarDays },
+  { href: "/dashboard/clients", label: "Clientes", icon: Users },
+  { href: "/dashboard/services", label: "Serviços", icon: Briefcase },
+  { href: "/dashboard/billing", label: "Plano", icon: CreditCard },
 ];
 
 export function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   return (
-    <nav className="space-y-1">
+    <nav className="space-y-1" aria-label="Área de gestão">
       {NAV_ITEMS.map(({ href, label, icon: Icon, exact }) => {
         const active = exact ? pathname === href : pathname.startsWith(href);
         return (

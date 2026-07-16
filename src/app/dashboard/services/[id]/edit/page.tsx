@@ -27,11 +27,11 @@ export default async function EditServicePage({
         href="/dashboard/services"
         className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >
-        <ArrowLeft className="h-4 w-4" /> Back to services
+        <ArrowLeft className="h-4 w-4" /> Voltar para serviços
       </Link>
 
       <header className="mb-8">
-        <h1 className="text-3xl font-bold">Edit service</h1>
+        <h1 className="text-3xl font-bold">Editar serviço</h1>
         <p className="mt-1 text-sm text-muted-foreground">{service.name}</p>
       </header>
 
@@ -46,8 +46,8 @@ export default async function EditServicePage({
             price: service.price_cents / 100,
             active: service.active,
           }}
-          submitLabel="Save changes"
-          pendingLabel="Saving..."
+          submitLabel="Salvar alterações"
+          pendingLabel="Salvando..."
         />
       </div>
     </div>

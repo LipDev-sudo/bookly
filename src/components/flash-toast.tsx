@@ -4,9 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { CheckCircle2, X } from "lucide-react";
 
 const LABELS: Record<string, string> = {
-  created: "Created successfully.",
-  updated: "Changes saved.",
-  deleted: "Deleted successfully.",
+  created: "Cadastro criado.",
+  updated: "Alterações salvas.",
+  deleted: "Cadastro excluído.",
 };
 
 export function FlashToast({ message }: { message?: string }) {
@@ -31,13 +31,13 @@ export function FlashToast({ message }: { message?: string }) {
   if (!visible || !message) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 shadow-lg animate-toast-in">
+    <div className="fixed bottom-4 right-4 z-50 flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-3 shadow-lg animate-toast-in" role="status">
       <CheckCircle2 className="h-4 w-4 shrink-0 text-green-500" />
       <p className="text-sm font-medium">{LABELS[message] ?? message}</p>
       <button
         onClick={close}
         className="ml-1 rounded p-0.5 text-muted-foreground hover:text-foreground"
-        aria-label="Dismiss notification"
+        aria-label="Fechar notificação"
       >
         <X className="h-3.5 w-3.5" />
       </button>

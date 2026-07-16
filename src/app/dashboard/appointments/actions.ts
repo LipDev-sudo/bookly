@@ -11,10 +11,10 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const appointmentSchema = z
   .object({
-    client_id: z.string().uuid("Select a client"),
-    service_id: z.string().uuid("Select a service"),
-    date: z.string().min(1, "Date is required"),
-    time: z.string().min(1, "Time is required"),
+    client_id: z.string().uuid("Selecione um cliente"),
+    service_id: z.string().uuid("Selecione um serviço"),
+    date: z.string().min(1, "Informe a data"),
+    time: z.string().min(1, "Informe o horário"),
     notes: z
       .string()
       .max(1000)
@@ -103,7 +103,7 @@ export async function createAppointmentAction(
   if (!parsed.success) return { fieldErrors: mapZodErrors(parsed.error) };
 
   const businessId = await getBusinessId();
-  if (!businessId) return { error: "No business found for this user." };
+  if (!businessId) return { error: "Nenhum negócio foi encontrado para esta conta." };
 
   const durationMin = await getServiceDuration(parsed.data.service_id);
   const starts_at = parsed.data.starts_at.toISOString();
@@ -134,7 +134,7 @@ export async function updateAppointmentAction(
   formData: FormData,
 ): Promise<AppointmentFormState> {
   const id = String(formData.get("id") ?? "");
-  if (!id) return { error: "Missing appointment id." };
+  if (!id) return { error: "Identificador do agendamento ausente." };
 
   const parsed = parseForm(formData);
   if (!parsed.success) return { fieldErrors: mapZodErrors(parsed.error) };

@@ -1,64 +1,171 @@
 import Link from "next/link";
-import { ArrowRight, BarChart3, CalendarDays, CheckCircle2, Users } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  CalendarCheck2,
+  CheckCircle2,
+  Clock3,
+  Users,
+} from "lucide-react";
+import { BrandMark } from "@/components/brand-mark";
 import { DemoButton } from "@/components/demo-button";
+import { DEMO_DISCLOSURE, SITE_SLOGAN } from "@/lib/site";
+
+const todayAppointments = [
+  { time: "14:00", client: "Marina Costa", service: "Corte e finalização" },
+  { time: "15:30", client: "Beatriz Nunes", service: "Escova modelada" },
+  { time: "17:00", client: "Juliana Alves", service: "Hidratação" },
+];
 
 export default function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="border-b border-border">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-2 font-bold">
-            <CalendarDays className="h-6 w-6 text-primary" />
-            <span className="text-lg">Bookly</span>
+      <header className="border-b border-border bg-background/95">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6">
+          <Link
+            href="/"
+            aria-label="Horavia — início"
+            className="inline-flex min-h-11 items-center"
+          >
+            <BrandMark />
           </Link>
-          <nav className="flex items-center gap-3 text-sm" aria-label="Main navigation">
-            <Link href="/demo" className="hidden font-medium text-muted-foreground hover:text-foreground sm:inline">Live demo</Link>
-            <Link href="/login" className="font-medium text-muted-foreground hover:text-foreground">Sign in</Link>
-            <Link href="/signup" className="rounded-md bg-primary px-4 py-2 font-semibold text-primary-foreground hover:opacity-90">Get started</Link>
+          <nav
+            className="flex items-center gap-2 text-sm"
+            aria-label="Navegação principal"
+          >
+            <Link
+              href="/demo"
+              className="hidden min-h-11 items-center rounded-lg px-3 font-medium text-muted-foreground hover:bg-muted hover:text-foreground sm:inline-flex"
+            >
+              Ver demonstração
+            </Link>
+            <Link
+              href="/login"
+              className="inline-flex min-h-11 items-center rounded-lg border border-border px-4 font-semibold hover:bg-muted"
+            >
+              Acessar conta
+            </Link>
           </nav>
         </div>
       </header>
 
       <main className="flex-1">
-        <section className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-16 lg:grid-cols-[1fr_0.9fr] lg:py-24">
+        <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-24">
           <div>
-            <span className="inline-flex rounded-full border border-border bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">Scheduling for service businesses</span>
-            <h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">Run appointments and client relationships <span className="text-primary">in one place.</span></h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">Bookly brings scheduling, client records, services and business performance into a focused workspace for small teams.</p>
+            <span className="inline-flex rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold text-primary">
+              Agenda e gestão para negócios de serviço
+            </span>
+            <h1 className="mt-5 max-w-3xl text-4xl font-bold tracking-[-0.04em] sm:text-6xl">
+              Sua agenda em ordem. Seu atendimento em movimento.
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+              A Horavia reúne horários, clientes, serviços e andamento do dia em
+              um espaço claro para quem precisa atender bem sem perder tempo com
+              controles dispersos.
+            </p>
+            <p className="mt-4 font-semibold text-foreground">{SITE_SLOGAN}</p>
             <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row">
-              <Link href="/signup" className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-semibold text-primary-foreground hover:opacity-90">Start free <ArrowRight className="h-4 w-4" /></Link>
               <DemoButton />
+              <Link
+                href="/login"
+                className="inline-flex min-h-12 items-center gap-2 rounded-lg px-5 font-semibold text-foreground hover:bg-muted"
+              >
+                Entrar na área segura <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
             <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary" />No account for demo</span>
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary" />Fictional local data</span>
+              <span className="inline-flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-primary" /> Sem cadastro
+                para explorar
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-primary" /> {DEMO_DISCLOSURE}
+              </span>
             </div>
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-4 shadow-xl shadow-primary/5 sm:p-6" aria-label="Bookly dashboard preview">
+          <div
+            className="rounded-2xl border border-border bg-card p-4 shadow-[0_24px_70px_-36px_hsl(174_62%_24%/0.45)] sm:p-6"
+            aria-label="Prévia da agenda do Estúdio Aurora"
+          >
             <div className="flex items-center justify-between border-b border-border pb-4">
-              <div><p className="text-xs font-semibold uppercase tracking-wider text-primary">Today</p><p className="mt-1 font-bold">Studio overview</p></div>
-              <span className="rounded-full bg-green-100 px-2.5 py-1 text-xs font-semibold text-green-800 dark:bg-green-950 dark:text-green-300">Open</span>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                  Hoje
+                </p>
+                <p className="mt-1 font-bold">Estúdio Aurora</p>
+              </div>
+              <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200">
+                Agenda aberta
+              </span>
             </div>
-            <div className="mt-5 grid grid-cols-2 gap-3"><PreviewMetric label="Appointments" value="4" /><PreviewMetric label="Clients" value="28" /></div>
-            <div className="mt-5 space-y-3">{["Marina Costa · 14:00", "Rafael Lima · 15:30", "Camila Rocha · 17:00"].map((item, index) => <div key={item} className="flex items-center gap-3 rounded-lg bg-muted p-3"><span className="grid h-8 w-8 place-items-center rounded-full bg-primary text-xs font-bold text-primary-foreground">{index + 1}</span><span className="text-sm font-medium">{item}</span></div>)}</div>
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              <PreviewMetric label="Agendados" value="3" />
+              <PreviewMetric label="Concluídos" value="2" />
+            </div>
+            <div className="mt-5 space-y-2.5">
+              {todayAppointments.map((appointment) => (
+                <div
+                  key={`${appointment.time}-${appointment.client}`}
+                  className="grid grid-cols-[3.25rem_1fr] gap-3 rounded-xl border border-border bg-background p-3"
+                >
+                  <span className="inline-flex items-center gap-1 text-sm font-bold text-primary">
+                    <Clock3 className="h-3.5 w-3.5" /> {appointment.time}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate text-sm font-semibold">
+                      {appointment.client}
+                    </span>
+                    <span className="block truncate text-xs text-muted-foreground">
+                      {appointment.service}
+                    </span>
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-6 pb-20">
-          <div className="mb-8 max-w-2xl"><p className="text-sm font-semibold text-primary">Core workflow</p><h2 className="mt-2 text-3xl font-bold">Everything needed for the daily schedule</h2></div>
-          <div className="grid gap-6 sm:grid-cols-3">
-            <Feature icon={<CalendarDays className="h-6 w-6 text-primary" />} title="Smart scheduling" desc="Organize appointments, duration and status in a single calendar-ready workflow." />
-            <Feature icon={<Users className="h-6 w-6 text-primary" />} title="Client CRM" desc="Keep contact details, notes and visit history connected to each booking." />
-            <Feature icon={<BarChart3 className="h-6 w-6 text-primary" />} title="Business overview" desc="Review completed services and operational indicators without spreadsheet work." />
+        <section className="border-t border-border bg-muted/35">
+          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:py-20">
+            <div className="mb-8 max-w-2xl">
+              <p className="text-sm font-semibold text-primary">Fluxo essencial</p>
+              <h2 className="mt-2 text-3xl font-bold tracking-[-0.03em]">
+                O dia de atendimento, sem ruído
+              </h2>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-3">
+              <Feature
+                icon={<CalendarCheck2 className="h-6 w-6" />}
+                title="Agenda operacional"
+                description="Horários, duração e status reunidos para leitura rápida entre um atendimento e outro."
+              />
+              <Feature
+                icon={<Users className="h-6 w-6" />}
+                title="Histórico de clientes"
+                description="Contatos e frequência de visitas conectados ao serviço que cada pessoa agenda."
+              />
+              <Feature
+                icon={<BarChart3 className="h-6 w-6" />}
+                title="Visão do andamento"
+                description="Indicadores derivados dos próprios registros fictícios, sem métricas comerciais inventadas."
+              />
+            </div>
           </div>
         </section>
       </main>
 
       <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} Bookly. Built by LipDev.</span>
-          <Link href="https://lipdev.vercel.app" target="_blank" rel="noreferrer" className="hover:text-foreground">Portfolio</Link>
+        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <span>Horavia — demonstração fictícia desenvolvida por LipDev.</span>
+          <Link
+            href="https://lipdev.vercel.app"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-11 items-center font-medium hover:text-foreground"
+          >
+            Conhecer o desenvolvedor
+          </Link>
         </div>
       </footer>
     </div>
@@ -66,9 +173,30 @@ export default function LandingPage() {
 }
 
 function PreviewMetric({ label, value }: { label: string; value: string }) {
-  return <div className="rounded-lg border border-border p-4"><p className="text-xs text-muted-foreground">{label}</p><p className="mt-1 text-2xl font-bold">{value}</p></div>;
+  return (
+    <div className="rounded-xl bg-muted p-4">
+      <p className="text-xs text-muted-foreground">{label}</p>
+      <p className="mt-1 text-2xl font-bold">{value}</p>
+    </div>
+  );
 }
 
-function Feature({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
-  return <article className="rounded-xl border border-border bg-card p-6"><div className="mb-3">{icon}</div><h3 className="mb-2 text-lg font-semibold">{title}</h3><p className="text-sm leading-6 text-muted-foreground">{desc}</p></article>;
+function Feature({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}) {
+  return (
+    <article className="rounded-2xl border border-border bg-card p-6">
+      <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
+        {icon}
+      </div>
+      <h3 className="mb-2 text-lg font-semibold">{title}</h3>
+      <p className="text-sm leading-6 text-muted-foreground">{description}</p>
+    </article>
+  );
 }

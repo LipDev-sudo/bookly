@@ -12,9 +12,9 @@ export default function LoginPage() {
 
   return (
     <>
-      <h1 className="mb-1 text-2xl font-bold">Welcome back</h1>
+      <h1 className="mb-1 text-2xl font-bold">Acesse sua agenda</h1>
       <p className="mb-6 text-sm text-muted-foreground">
-        Sign in to your Bookly account
+        Entre na sua conta Horavia
       </p>
 
       <form action={formAction} className="space-y-4">
@@ -33,7 +33,7 @@ export default function LoginPage() {
         </div>
         <div>
           <label htmlFor="password" className="mb-1 block text-sm font-medium">
-            Password
+            Senha
           </label>
           <input
             id="password"
@@ -54,20 +54,20 @@ export default function LoginPage() {
           disabled={pending}
           className="w-full rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground hover:opacity-90 disabled:opacity-50"
         >
-          {pending ? "Signing in..." : "Sign in"}
+          {pending ? "Entrando..." : "Entrar"}
         </button>
       </form>
 
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        Don&apos;t have an account?{" "}
+        Ainda não tem uma conta?{" "}
         <Link href="/signup" className="text-primary hover:underline">
-          Sign up
+          Criar conta
         </Link>
       </p>
       <p className="mt-3 text-center text-sm text-muted-foreground">
-        Want to evaluate Bookly without an account?{" "}
+        Quer conhecer a Horavia sem criar conta?{" "}
         <Link href="/demo" className="font-medium text-primary hover:underline">
-          Open the local demo
+          Abrir demonstração local
         </Link>
       </p>
     </>
