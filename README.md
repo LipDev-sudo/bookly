@@ -4,7 +4,7 @@
 
 Horavia é uma demonstração de produto para organização de agenda, clientes e serviços em pequenos negócios de atendimento. A experiência pública usa o Estúdio Aurora, um negócio fictício de cabelo e beleza, para apresentar um fluxo coerente sem exigir cadastro ou credenciais externas.
 
-- **Demonstração:** [https://horavia-lip-dev.vercel.app](https://horavia-lip-dev.vercel.app)
+- **Demonstração:** [https://horavia.vercel.app/demo](https://horavia.vercel.app/demo)
 - **Repositório:** [https://github.com/LipDev-sudo/horavia](https://github.com/LipDev-sudo/horavia)
 
 > Projeto demonstrativo de portfólio. Os nomes, contatos, horários e valores exibidos são fictícios e não representam clientes ou resultados comerciais reais.
