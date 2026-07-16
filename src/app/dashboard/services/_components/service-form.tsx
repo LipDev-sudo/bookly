@@ -42,22 +42,22 @@ export function ServiceForm({
 
       <Field
         id="name"
-        label="Service name"
+        label="Nome do serviço"
         required
-        placeholder="Men's haircut"
+        placeholder="Corte e finalização"
         defaultValue={defaults?.name ?? ""}
         error={state?.fieldErrors?.name}
       />
 
       <div>
         <label htmlFor="description" className="mb-1 block text-sm font-medium">
-          Description
+          Descrição
         </label>
         <textarea
           id="description"
           name="description"
           rows={3}
-          placeholder="Optional — what's included, what to expect..."
+          placeholder="Opcional — descreva o que está incluído..."
           defaultValue={defaults?.description ?? ""}
           className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
         />
@@ -71,7 +71,7 @@ export function ServiceForm({
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
           id="duration_min"
-          label="Duration (minutes)"
+          label="Duração (minutos)"
           type="number"
           required
           min={5}
@@ -81,7 +81,7 @@ export function ServiceForm({
         />
         <Field
           id="price"
-          label="Price"
+          label="Preço"
           type="number"
           required
           min={0}
@@ -100,7 +100,7 @@ export function ServiceForm({
           defaultChecked={defaults?.active ?? true}
           className="h-4 w-4 rounded border-border accent-primary"
         />
-        Active (clients can book this service)
+        Ativo para novos agendamentos
       </label>
 
       {state?.error && (
@@ -120,7 +120,7 @@ export function ServiceForm({
           href="/dashboard/services"
           className="rounded-md border border-border px-4 py-2 text-sm transition-colors hover:bg-muted"
         >
-          Cancel
+          Cancelar
         </Link>
       </div>
     </form>

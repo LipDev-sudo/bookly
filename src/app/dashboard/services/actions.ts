@@ -10,21 +10,21 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 // ----------------------------------------------------------------
 
 const serviceSchema = z.object({
-  name: z.string().min(1, "Name is required").max(120),
+  name: z.string().min(1, "Informe o nome").max(120),
   description: z
     .string()
     .max(1000)
     .optional()
     .or(z.literal("").transform(() => undefined)),
   duration_min: z.coerce
-    .number({ message: "Duration must be a number" })
-    .int("Duration must be a whole number")
-    .min(5, "Minimum 5 minutes")
-    .max(1440, "Maximum 24 hours"),
+    .number({ message: "A duração deve ser um número" })
+    .int("A duração deve ser um número inteiro")
+    .min(5, "A duração mínima é de 5 minutos")
+    .max(1440, "A duração máxima é de 24 horas"),
   // Price is entered in major units (e.g. 49.90), stored as cents.
   price: z.coerce
-    .number({ message: "Price must be a number" })
-    .min(0, "Price cannot be negative")
+    .number({ message: "O preço deve ser um número" })
+    .min(0, "O preço não pode ser negativo")
     .max(1_000_000),
   active: z.coerce.boolean().optional().default(true),
 });
@@ -89,7 +89,7 @@ export async function createServiceAction(
   if (!parsed.success) return { fieldErrors: mapZodErrors(parsed.error) };
 
   const businessId = await getBusinessId();
-  if (!businessId) return { error: "No business found for this user." };
+  if (!businessId) return { error: "Nenhum negócio foi encontrado para esta conta." };
 
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("services").insert({
@@ -113,7 +113,7 @@ export async function updateServiceAction(
   formData: FormData,
 ): Promise<ServiceFormState> {
   const id = String(formData.get("id") ?? "");
-  if (!id) return { error: "Missing service id." };
+  if (!id) return { error: "Identificador do serviço ausente." };
 
   const parsed = parseForm(formData);
   if (!parsed.success) return { fieldErrors: mapZodErrors(parsed.error) };

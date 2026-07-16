@@ -1,139 +1,93 @@
-# Bookly
+# Horavia
 
-> Lightweight booking & client management for service businesses.
-> Built by [LipDev](https://lipdev-portfolio.vercel.app) with Next.js 16, Supabase and Stripe.
+**Do primeiro horário ao último atendimento.**
 
-A portfolio-grade SaaS demo: barbershops, salons, personal trainers and any
-small service business can sign up, manage clients and services, schedule
-appointments, and (in test mode) upgrade to a Pro plan via Stripe.
+Horavia é uma demonstração de produto para organização de agenda, clientes e serviços em pequenos negócios de atendimento. A experiência pública usa o Estúdio Aurora, um negócio fictício de cabelo e beleza, para apresentar um fluxo coerente sem exigir cadastro ou credenciais externas.
 
----
+> Projeto demonstrativo de portfólio. Os nomes, contatos, horários e valores exibidos são fictícios e não representam clientes ou resultados comerciais reais.
 
-## Stack
+## Demonstração interativa
 
-| Layer       | Choice                                  |
-| ----------- | --------------------------------------- |
-| Framework   | Next.js 16 (App Router, Turbopack)      |
-| Language    | TypeScript                              |
-| Styling     | Tailwind CSS v4                         |
-| UI          | lucide-react icons, custom components   |
-| Auth + DB   | Supabase (Postgres + RLS)               |
-| Payments    | Stripe (test mode)                      |
-| Charts      | Recharts                                |
-| Forms       | react-hook-form + zod                   |
-| Theming     | next-themes (dark mode)                 |
+Execute o projeto e acesse [`/demo`](http://localhost:3000/demo). A demonstração:
 
----
+- funciona sem conta, Supabase ou Stripe;
+- reúne visão geral, agenda, clientes e serviços;
+- calcula indicadores apenas a partir dos registros fictícios;
+- salva alterações somente no navegador, em `horavia-demo-v1`;
+- permite concluir o próximo atendimento, limpar os dados e restaurar o cenário inicial;
+- apresenta estados vazios e recuperação de dados.
 
-## Project structure
+![Demonstração da Horavia em desktop](docs/screenshots/horavia-demo-desktop.png)
 
-```
-src/
-├── app/
-│   ├── (auth)/              ← login, signup, server actions
-│   │   ├── login/
-│   │   ├── signup/
-│   │   ├── layout.tsx
-│   │   └── actions.ts
-│   ├── dashboard/           ← protected app
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── layout.tsx
-│   ├── page.tsx             ← landing page
-│   └── globals.css
-├── components/
-│   └── theme-provider.tsx
-├── lib/
-│   ├── supabase/
-│   │   ├── client.ts        ← browser client
-│   │   ├── server.ts        ← server client + admin client
-│   │   └── middleware.ts    ← session refresh helper
-│   ├── stripe.ts            ← server-side Stripe client
-│   └── utils.ts             ← cn(), formatters
-└── proxy.ts                 ← Next.js 16 proxy (replaces middleware)
+<details>
+<summary>Visualização mobile</summary>
 
-supabase/
-└── schema.sql               ← run this in Supabase SQL Editor
-```
+![Demonstração da Horavia em mobile](docs/screenshots/horavia-demo-mobile.png)
 
----
+</details>
 
-## Quick start
+## Competências demonstradas
 
-### 1. Install dependencies
+- arquitetura Next.js 16 com App Router e React 19;
+- TypeScript, Tailwind CSS 4 e componentes responsivos;
+- autenticação, Postgres e Row Level Security com Supabase;
+- CRUD protegido de clientes, serviços e atendimentos;
+- Stripe Checkout e webhook assinado em modo de teste;
+- estado local validado com Zod para uma demo independente;
+- testes unitários com Vitest e CI no GitHub Actions;
+- metadata, Open Graph, sitemap, robots e acessibilidade.
+
+## Execução local
 
 ```bash
-npm install
+npm ci
+npm run dev
 ```
 
-### 2. Set up environment variables
+A landing page e a rota `/demo` funcionam sem variáveis de ambiente.
 
-Copy the template and fill in your own keys:
+Para testar autenticação, persistência e cobrança, copie o modelo e adicione suas próprias credenciais de teste:
 
 ```bash
 cp .env.example .env.local
 ```
 
-You will need:
+Depois, execute [`supabase/schema.sql`](supabase/schema.sql) no SQL Editor do Supabase.
 
-- A **Supabase** project — https://supabase.com/dashboard
-- A **Stripe** account in test mode — https://dashboard.stripe.com/test/apikeys
+| Variável | Exposição | Finalidade |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Navegador | URL do projeto Supabase |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Navegador | Chave pública do Supabase |
+| `SUPABASE_SECRET_KEY` | Servidor | Operações administrativas do webhook |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Navegador | Chave pública de teste da Stripe |
+| `STRIPE_SECRET_KEY` | Servidor | Sessões de checkout |
+| `STRIPE_WEBHOOK_SECRET` | Servidor | Validação da assinatura do webhook |
+| `NEXT_PUBLIC_APP_URL` | Público | URL base de redirects e metadata |
 
-See [`.env.example`](./.env.example) for the full list.
+Nunca versione `.env.local`. O webhook rejeita requisições sem assinatura e chaves de servidor não devem usar o prefixo `NEXT_PUBLIC_`.
 
-### 3. Run the database migrations
-
-1. Open your Supabase project → **SQL Editor** → **New query**
-2. Paste the contents of [`supabase/schema.sql`](./supabase/schema.sql)
-3. Click **Run**
-
-This creates the `businesses`, `clients`, `services` and `appointments` tables,
-sets up Row Level Security so each user only sees their own data, and adds a
-trigger that auto-creates a business on signup.
-
-### 4. Start the dev server
+## Qualidade
 
 ```bash
-npm run dev
+npm test
+npm run typecheck
+npm run lint
+npm run build
+npm audit
 ```
 
-Open http://localhost:3000.
+O GitHub Actions executa instalação limpa, testes, typecheck, lint e build em pushes e Pull Requests.
 
----
+## Estrutura principal
 
-## Features
+```text
+src/app/demo/              demonstração pública local
+src/app/dashboard/         aplicação autenticada
+src/app/api/stripe/        checkout e webhook
+src/components/demo/       interface modular da demonstração
+src/lib/demo-data.ts       estado e registros fictícios validados
+src/lib/supabase/          clientes de navegador, servidor e proxy
+supabase/schema.sql        schema e políticas RLS
+```
 
-### Shipped
-
-- ✅ Landing page with dark mode
-- ✅ Email/password auth via Supabase + Server Actions
-- ✅ Protected `/dashboard` route via Next.js proxy
-- ✅ Multi-tenant: every signup creates a business, RLS isolates data
-- ✅ Dashboard skeleton with live counts from the database
-
-### Roadmap
-
-- ⏳ Clients CRUD page
-- ⏳ Services CRUD page
-- ⏳ Calendar view for appointments (drag-to-create)
-- ⏳ Revenue chart (Recharts)
-- ⏳ Stripe Checkout for Pro upgrade
-- ⏳ Webhook handler to flip `businesses.plan` to `pro`
-- ⏳ Demo Mode (one-click login with seeded data)
-- ⏳ Bilingual PT/EN toggle
-
----
-
-## Security notes
-
-- `.env.local` is gitignored — never commit it.
-- The Supabase **secret** key (`sb_secret_...`) bypasses RLS. Keep it server-only.
-- The Stripe **secret** key (`sk_test_...`) must never leak to the browser.
-- Test mode means no real money moves. Cards like `4242 4242 4242 4242` work.
-- Rotate keys if they ever leak: Supabase → Settings → API Keys → Regenerate.
-
----
-
-## License
-
-MIT — feel free to fork as a learning reference.
+Desenvolvido por [LipDev](https://lipdev.vercel.app).

@@ -29,13 +29,13 @@ export default async function EditClientPage({
         href="/dashboard/clients"
         className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
       >
-        <ArrowLeft className="h-4 w-4" /> Back to clients
+        <ArrowLeft className="h-4 w-4" /> Voltar para clientes
       </Link>
 
       <header className="mb-8">
-        <h1 className="text-3xl font-bold">Edit client</h1>
+        <h1 className="text-3xl font-bold">Editar cliente</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Update {client.name}&apos;s information.
+          Atualize as informações de {client.name}.
         </p>
       </header>
 
@@ -49,8 +49,8 @@ export default async function EditClientPage({
             phone: client.phone,
             notes: client.notes,
           }}
-          submitLabel="Save changes"
-          pendingLabel="Saving..."
+          submitLabel="Salvar alterações"
+          pendingLabel="Salvando..."
         />
       </div>
     </div>

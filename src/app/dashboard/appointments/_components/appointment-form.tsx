@@ -54,7 +54,7 @@ export function AppointmentForm({
           htmlFor="client_id"
           className="mb-1 block text-sm font-medium"
         >
-          Client <span className="text-destructive">*</span>
+          Cliente <span className="text-destructive">*</span>
         </label>
         <select
           id="client_id"
@@ -64,7 +64,7 @@ export function AppointmentForm({
           className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
         >
           <option value="" disabled>
-            Select a client...
+            Selecione um cliente...
           </option>
           {clients.map((c) => (
             <option key={c.id} value={c.id}>
@@ -85,7 +85,7 @@ export function AppointmentForm({
           htmlFor="service_id"
           className="mb-1 block text-sm font-medium"
         >
-          Service <span className="text-destructive">*</span>
+          Serviço <span className="text-destructive">*</span>
         </label>
         <select
           id="service_id"
@@ -95,7 +95,7 @@ export function AppointmentForm({
           className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
         >
           <option value="" disabled>
-            Select a service...
+            Selecione um serviço...
           </option>
           {services.map((s) => (
             <option key={s.id} value={s.id}>
@@ -114,7 +114,7 @@ export function AppointmentForm({
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="date" className="mb-1 block text-sm font-medium">
-            Date <span className="text-destructive">*</span>
+            Data <span className="text-destructive">*</span>
           </label>
           <input
             id="date"
@@ -132,7 +132,7 @@ export function AppointmentForm({
         </div>
         <div>
           <label htmlFor="time" className="mb-1 block text-sm font-medium">
-            Time <span className="text-destructive">*</span>
+            Horário <span className="text-destructive">*</span>
           </label>
           <input
             id="time"
@@ -162,10 +162,10 @@ export function AppointmentForm({
             defaultValue={defaults?.status ?? "scheduled"}
             className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
           >
-            <option value="scheduled">Scheduled</option>
-            <option value="completed">Completed</option>
-            <option value="canceled">Canceled</option>
-            <option value="no_show">No show</option>
+            <option value="scheduled">Agendado</option>
+            <option value="completed">Concluído</option>
+            <option value="canceled">Cancelado</option>
+            <option value="no_show">Não compareceu</option>
           </select>
         </div>
       )}
@@ -173,13 +173,13 @@ export function AppointmentForm({
       {/* Notes */}
       <div>
         <label htmlFor="notes" className="mb-1 block text-sm font-medium">
-          Notes
+          Observações
         </label>
         <textarea
           id="notes"
           name="notes"
           rows={2}
-          placeholder="Optional..."
+          placeholder="Opcional..."
           defaultValue={defaults?.notes ?? ""}
           className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
         />
@@ -202,7 +202,7 @@ export function AppointmentForm({
           href="/dashboard/appointments"
           className="rounded-md border border-border px-4 py-2 text-sm transition-colors hover:bg-muted"
         >
-          Cancel
+          Cancelar
         </Link>
       </div>
     </form>

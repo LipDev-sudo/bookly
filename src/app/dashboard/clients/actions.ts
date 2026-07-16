@@ -10,10 +10,10 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 // ----------------------------------------------------------------
 
 const clientSchema = z.object({
-  name: z.string().min(1, "Name is required").max(120),
+  name: z.string().min(1, "Informe o nome").max(120),
   email: z
     .string()
-    .email("Invalid email")
+    .email("Email inválido")
     .max(160)
     .optional()
     .or(z.literal("").transform(() => undefined)),
@@ -86,7 +86,7 @@ export async function createClientAction(
   if (!parsed.success) return { fieldErrors: mapZodErrors(parsed.error) };
 
   const businessId = await getBusinessId();
-  if (!businessId) return { error: "No business found for this user." };
+  if (!businessId) return { error: "Nenhum negócio foi encontrado para esta conta." };
 
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("clients").insert({
@@ -109,7 +109,7 @@ export async function updateClientAction(
   formData: FormData,
 ): Promise<ClientFormState> {
   const id = String(formData.get("id") ?? "");
-  if (!id) return { error: "Missing client id." };
+  if (!id) return { error: "Identificador do cliente ausente." };
 
   const parsed = parseForm(formData);
   if (!parsed.success) return { fieldErrors: mapZodErrors(parsed.error) };

@@ -3,31 +3,35 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(222 47% 11%);
-  --muted: hsl(210 40% 96%);
-  --muted-foreground: hsl(215 16% 47%);
-  --border: hsl(214 32% 91%);
+  --background: hsl(40 33% 98%);
+  --foreground: hsl(176 38% 12%);
+  --muted: hsl(174 18% 94%);
+  --muted-foreground: hsl(176 10% 39%);
+  --border: hsl(174 17% 87%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(222 47% 11%);
-  --primary: hsl(221 83% 53%);
-  --primary-foreground: hsl(210 40% 98%);
-  --destructive: hsl(0 84% 60%);
-  --ring: hsl(221 83% 53%);
+  --card-foreground: hsl(176 38% 12%);
+  --primary: hsl(174 62% 24%);
+  --primary-foreground: hsl(40 33% 98%);
+  --accent: hsl(18 88% 56%);
+  --accent-foreground: hsl(18 50% 15%);
+  --destructive: hsl(0 72% 51%);
+  --ring: hsl(174 62% 24%);
 }
 
 .dark {
-  --background: hsl(222 47% 6%);
-  --foreground: hsl(210 40% 98%);
-  --muted: hsl(217 33% 17%);
-  --muted-foreground: hsl(215 20% 65%);
-  --border: hsl(217 33% 17%);
-  --card: hsl(222 47% 8%);
-  --card-foreground: hsl(210 40% 98%);
-  --primary: hsl(217 91% 60%);
-  --primary-foreground: hsl(222 47% 11%);
-  --destructive: hsl(0 63% 50%);
-  --ring: hsl(217 91% 60%);
+  --background: hsl(176 38% 7%);
+  --foreground: hsl(40 20% 96%);
+  --muted: hsl(175 24% 14%);
+  --muted-foreground: hsl(174 12% 68%);
+  --border: hsl(175 22% 19%);
+  --card: hsl(176 34% 9%);
+  --card-foreground: hsl(40 20% 96%);
+  --primary: hsl(172 55% 48%);
+  --primary-foreground: hsl(176 38% 7%);
+  --accent: hsl(18 88% 62%);
+  --accent-foreground: hsl(18 50% 12%);
+  --destructive: hsl(0 66% 53%);
+  --ring: hsl(172 55% 48%);
 }
 
 @theme inline {
@@ -40,6 +44,8 @@
   --color-card-foreground: var(--card-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-ring: var(--ring);
 
@@ -72,4 +78,20 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

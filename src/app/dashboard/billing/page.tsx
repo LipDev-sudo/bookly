@@ -19,9 +19,9 @@ export default async function BillingPage() {
   return (
     <div className="p-6 sm:p-10">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold">Billing</h1>
+        <h1 className="text-3xl font-bold">Plano e cobrança</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Manage your subscription plan.
+          Consulte o plano e teste a integração protegida com o Stripe.
         </p>
       </header>
 
@@ -34,18 +34,18 @@ export default async function BillingPage() {
               : "border-border bg-card"
           }`}
         >
-          <h2 className="text-xl font-bold">Free</h2>
+          <h2 className="text-xl font-bold">Gratuito</h2>
           <p className="mt-1 text-3xl font-bold">
-            $0<span className="text-base font-normal text-muted-foreground">/mo</span>
+            R$ 0<span className="text-base font-normal text-muted-foreground">/mês</span>
           </p>
           <ul className="mt-6 space-y-3 text-sm">
-            <Li>Up to 50 clients</Li>
-            <Li>Unlimited appointments</Li>
-            <Li>Basic dashboard</Li>
+            <Li>Agenda, clientes e serviços</Li>
+            <Li>Visão geral do negócio</Li>
+            <Li>Dados isolados por conta</Li>
           </ul>
           {!isPro && (
             <p className="mt-6 rounded-md bg-primary/10 px-3 py-2 text-center text-sm font-medium text-primary">
-              Current plan
+              Plano atual
             </p>
           )}
         </div>
@@ -63,18 +63,16 @@ export default async function BillingPage() {
             <Sparkles className="h-5 w-5 text-primary" />
           </div>
           <p className="mt-1 text-3xl font-bold">
-            $19<span className="text-base font-normal text-muted-foreground">/mo</span>
+            US$ 19<span className="text-base font-normal text-muted-foreground">/mês</span>
           </p>
           <ul className="mt-6 space-y-3 text-sm">
-            <Li>Unlimited clients</Li>
-            <Li>Unlimited appointments</Li>
-            <Li>Revenue reports & charts</Li>
-            <Li>Priority support</Li>
-            <Li>Custom branding (soon)</Li>
+            <Li>Checkout Stripe em modo de teste</Li>
+            <Li>Webhook assinado para atualização do plano</Li>
+            <Li>Relatório de receita por atendimentos concluídos</Li>
           </ul>
           {isPro ? (
             <p className="mt-6 rounded-md bg-primary/10 px-3 py-2 text-center text-sm font-medium text-primary">
-              Current plan
+              Plano atual
             </p>
           ) : (
             <div className="mt-6">
@@ -85,8 +83,7 @@ export default async function BillingPage() {
       </div>
 
       <p className="mt-6 text-xs text-muted-foreground">
-        Payments are processed securely via Stripe. You can cancel anytime.
-        {!isPro && " This is running in test mode — no real charges."}
+        Demonstração técnica: o checkout utiliza o modo de teste do Stripe e não realiza cobranças reais.
       </p>
     </div>
   );

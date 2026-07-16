@@ -24,18 +24,18 @@ export default async function ServicesPage({
     <div className="p-6 sm:p-10">
       <FlashToast message={toast} />
 
-      <header className="mb-8 flex items-center justify-between">
+      <header className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Services</h1>
+          <h1 className="text-3xl font-bold">Serviços</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            What you sell, how long it takes, what it costs.
+            Organize o que é oferecido, sua duração e preço.
           </p>
         </div>
         <Link
           href="/dashboard/services/new"
           className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
         >
-          <Plus className="h-4 w-4" /> New service
+          <Plus className="h-4 w-4" /> Novo serviço
         </Link>
       </header>
 
@@ -53,7 +53,7 @@ export default async function ServicesPage({
                   <h2 className="text-lg font-semibold">{s.name}</h2>
                   {!s.active && (
                     <span className="mt-1 inline-block rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-                      Inactive
+                      Inativo
                     </span>
                   )}
                 </div>
@@ -61,7 +61,7 @@ export default async function ServicesPage({
                   <Link
                     href={`/dashboard/services/${s.id}/edit`}
                     className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                    aria-label={`Edit ${s.name}`}
+                    aria-label={`Editar ${s.name}`}
                   >
                     <Pencil className="h-4 w-4" />
                   </Link>
@@ -99,15 +99,15 @@ function EmptyState() {
   return (
     <div className="rounded-lg border border-dashed border-border bg-card p-12 text-center">
       <Briefcase className="mx-auto h-10 w-10 text-muted-foreground" />
-      <h3 className="mt-4 text-lg font-semibold">No services yet</h3>
+      <h3 className="mt-4 text-lg font-semibold">Nenhum serviço</h3>
       <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
-        Add the services you offer so you can schedule them for clients.
+        Cadastre os serviços para vinculá-los aos agendamentos.
       </p>
       <Link
         href="/dashboard/services/new"
         className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
       >
-        <Plus className="h-4 w-4" /> Add your first service
+        <Plus className="h-4 w-4" /> Adicionar serviço
       </Link>
     </div>
   );

@@ -16,11 +16,11 @@ export function UpgradeButton() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        setError(data.error ?? "Something went wrong. Please try again.");
+        setError(data.error ?? "Não foi possível abrir o checkout. Tente novamente.");
         setLoading(false);
       }
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError("Não foi possível abrir o checkout. Tente novamente.");
       setLoading(false);
     }
   }
@@ -37,7 +37,7 @@ export function UpgradeButton() {
         ) : (
           <Sparkles className="h-4 w-4" />
         )}
-        {loading ? "Redirecting to Stripe..." : "Upgrade to Pro — $19/mo"}
+        {loading ? "Abrindo Stripe..." : "Testar plano Pro — US$ 19/mês"}
       </button>
       {error && <p className="text-center text-sm text-destructive">{error}</p>}
     </div>

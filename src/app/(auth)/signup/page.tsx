@@ -12,9 +12,9 @@ export default function SignupPage() {
 
   return (
     <>
-      <h1 className="mb-1 text-2xl font-bold">Create your account</h1>
+      <h1 className="mb-1 text-2xl font-bold">Crie sua conta</h1>
       <p className="mb-6 text-sm text-muted-foreground">
-        Free forever — no credit card required
+        Ambiente demonstrativo; integrações exigem credenciais próprias
       </p>
 
       <form action={formAction} className="space-y-4">
@@ -23,14 +23,14 @@ export default function SignupPage() {
             htmlFor="business_name"
             className="mb-1 block text-sm font-medium"
           >
-            Business name
+            Nome do negócio
           </label>
           <input
             id="business_name"
             name="business_name"
             type="text"
             required
-            placeholder="My Barbershop"
+            placeholder="Estúdio Aurora"
             className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
@@ -49,7 +49,7 @@ export default function SignupPage() {
         </div>
         <div>
           <label htmlFor="password" className="mb-1 block text-sm font-medium">
-            Password
+            Senha
           </label>
           <input
             id="password"
@@ -61,7 +61,7 @@ export default function SignupPage() {
             className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
           />
           <p className="mt-1 text-xs text-muted-foreground">
-            Minimum 6 characters
+            Mínimo de 6 caracteres
           </p>
         </div>
 
@@ -74,14 +74,14 @@ export default function SignupPage() {
           disabled={pending}
           className="w-full rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground hover:opacity-90 disabled:opacity-50"
         >
-          {pending ? "Creating account..." : "Create account"}
+          {pending ? "Criando conta..." : "Criar conta"}
         </button>
       </form>
 
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        Already have an account?{" "}
+        Já tem uma conta?{" "}
         <Link href="/login" className="text-primary hover:underline">
-          Sign in
+          Entrar
         </Link>
       </p>
     </>

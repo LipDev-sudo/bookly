@@ -11,15 +11,15 @@ import {
 } from "recharts";
 
 export type MonthlyRevenue = {
-  month: string; // "Jan", "Feb", etc.
-  revenue: number; // in major currency units
+  month: string;
+  revenue: number;
 };
 
 export function RevenueChart({ data }: { data: MonthlyRevenue[] }) {
   if (data.length === 0) {
     return (
       <div className="flex h-64 items-center justify-center text-sm text-muted-foreground">
-        No revenue data yet. Complete some appointments to see the chart.
+        Ainda não há receita registrada. Conclua atendimentos para visualizar o gráfico.
       </div>
     );
   }
@@ -29,8 +29,8 @@ export function RevenueChart({ data }: { data: MonthlyRevenue[] }) {
       <AreaChart data={data} margin={{ top: 4, right: 4, bottom: 0, left: -20 }}>
         <defs>
           <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="hsl(221, 83%, 53%)" stopOpacity={0.3} />
-            <stop offset="95%" stopColor="hsl(221, 83%, 53%)" stopOpacity={0} />
+            <stop offset="5%" stopColor="hsl(174, 62%, 24%)" stopOpacity={0.3} />
+            <stop offset="95%" stopColor="hsl(174, 62%, 24%)" stopOpacity={0} />
           </linearGradient>
         </defs>
         <CartesianGrid strokeDasharray="3 3" stroke="hsl(214, 32%, 91%)" />
@@ -55,17 +55,17 @@ export function RevenueChart({ data }: { data: MonthlyRevenue[] }) {
             fontSize: 13,
           }}
           formatter={(value) => [
-            new Intl.NumberFormat("en-US", {
+            new Intl.NumberFormat("pt-BR", {
               style: "currency",
-              currency: "USD",
+              currency: "BRL",
             }).format(Number(value)),
-            "Revenue",
+            "Receita",
           ]}
         />
         <Area
           type="monotone"
           dataKey="revenue"
-          stroke="hsl(221, 83%, 53%)"
+          stroke="hsl(174, 62%, 24%)"
           strokeWidth={2}
           fill="url(#revGrad)"
         />
