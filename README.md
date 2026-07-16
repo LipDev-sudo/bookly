@@ -1,92 +1,93 @@
-# Bookly
+# Horavia
 
-Scheduling and client management application for small service businesses. The project combines a public, credential-free demonstration with an authenticated Supabase application and optional Stripe test-mode billing.
+**Do primeiro horário ao último atendimento.**
 
-## Interactive demo
+Horavia é uma demonstração de produto para organização de agenda, clientes e serviços em pequenos negócios de atendimento. A experiência pública usa o Estúdio Aurora, um negócio fictício de cabelo e beleza, para apresentar um fluxo coerente sem exigir cadastro ou credenciais externas.
 
-Run the project and open [`/demo`](http://localhost:3000/demo). The demo:
+> Projeto demonstrativo de portfólio. Os nomes, contatos, horários e valores exibidos são fictícios e não representam clientes ou resultados comerciais reais.
 
-- requires no account, Supabase project or Stripe key;
-- uses fictional records only;
-- stores changes in the browser under `bookly-demo-v1`;
-- includes overview, appointments, clients and services;
-- can be cleared and restored to demonstrate empty states.
+## Demonstração interativa
 
-![Bookly demo dashboard](docs/screenshots/bookly-demo-desktop.png)
+Execute o projeto e acesse [`/demo`](http://localhost:3000/demo). A demonstração:
+
+- funciona sem conta, Supabase ou Stripe;
+- reúne visão geral, agenda, clientes e serviços;
+- calcula indicadores apenas a partir dos registros fictícios;
+- salva alterações somente no navegador, em `horavia-demo-v1`;
+- permite concluir o próximo atendimento, limpar os dados e restaurar o cenário inicial;
+- apresenta estados vazios e recuperação de dados.
+
+![Demonstração da Horavia em desktop](docs/screenshots/horavia-demo-desktop.png)
 
 <details>
-<summary>Mobile preview</summary>
+<summary>Visualização mobile</summary>
 
-![Bookly demo on mobile](docs/screenshots/bookly-demo-mobile.png)
+![Demonstração da Horavia em mobile](docs/screenshots/horavia-demo-mobile.png)
 
 </details>
 
-## Technology
+## Competências demonstradas
 
-- Next.js 16 App Router and React 19
-- TypeScript and Tailwind CSS 4
-- Supabase Auth, Postgres and Row Level Security
-- Stripe Checkout and signed webhooks in test mode
-- React Hook Form, Zod and Recharts
+- arquitetura Next.js 16 com App Router e React 19;
+- TypeScript, Tailwind CSS 4 e componentes responsivos;
+- autenticação, Postgres e Row Level Security com Supabase;
+- CRUD protegido de clientes, serviços e atendimentos;
+- Stripe Checkout e webhook assinado em modo de teste;
+- estado local validado com Zod para uma demo independente;
+- testes unitários com Vitest e CI no GitHub Actions;
+- metadata, Open Graph, sitemap, robots e acessibilidade.
 
-## Local setup
+## Execução local
 
 ```bash
 npm ci
 npm run dev
 ```
 
-The landing page and `/demo` work without environment variables.
+A landing page e a rota `/demo` funcionam sem variáveis de ambiente.
 
-To use authentication, persistent database records and billing, copy the template and provide your own test credentials:
+Para testar autenticação, persistência e cobrança, copie o modelo e adicione suas próprias credenciais de teste:
 
 ```bash
 cp .env.example .env.local
 ```
 
-Then execute [`supabase/schema.sql`](supabase/schema.sql) in the Supabase SQL Editor.
+Depois, execute [`supabase/schema.sql`](supabase/schema.sql) no SQL Editor do Supabase.
 
-| Variable | Visibility | Purpose |
+| Variável | Exposição | Finalidade |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL` | Browser-safe | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Browser-safe | Public Supabase client key |
-| `SUPABASE_SECRET_KEY` | Server only | Administrative webhook operations |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Browser-safe | Stripe.js test-mode key |
-| `STRIPE_SECRET_KEY` | Server only | Checkout sessions |
-| `STRIPE_WEBHOOK_SECRET` | Server only | Webhook signature verification |
-| `NEXT_PUBLIC_APP_URL` | Public | Redirect base URL |
+| `NEXT_PUBLIC_SUPABASE_URL` | Navegador | URL do projeto Supabase |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Navegador | Chave pública do Supabase |
+| `SUPABASE_SECRET_KEY` | Servidor | Operações administrativas do webhook |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Navegador | Chave pública de teste da Stripe |
+| `STRIPE_SECRET_KEY` | Servidor | Sessões de checkout |
+| `STRIPE_WEBHOOK_SECRET` | Servidor | Validação da assinatura do webhook |
+| `NEXT_PUBLIC_APP_URL` | Público | URL base de redirects e metadata |
 
-Never commit `.env.local`. The Stripe webhook rejects unsigned requests, and server-only keys must not use the `NEXT_PUBLIC_` prefix.
+Nunca versione `.env.local`. O webhook rejeita requisições sem assinatura e chaves de servidor não devem usar o prefixo `NEXT_PUBLIC_`.
 
-## Commands
+## Qualidade
 
 ```bash
-npm run lint
+npm test
 npm run typecheck
+npm run lint
 npm run build
+npm audit
 ```
 
-The repository currently has no automated test suite. GitHub Actions runs installation, lint, typecheck and production build for pull requests.
+O GitHub Actions executa instalação limpa, testes, typecheck, lint e build em pushes e Pull Requests.
 
-## Application areas
-
-- Public landing page and local interactive demo
-- Email/password authentication with Supabase
-- Protected dashboard overview
-- Clients, services and appointments CRUD
-- Revenue chart based on completed appointments
-- Stripe test-mode subscription checkout and signed webhook handling
-
-## Project structure
+## Estrutura principal
 
 ```text
-src/app/demo/              public local demo
-src/app/dashboard/         authenticated application
-src/app/api/stripe/        checkout and webhook routes
-src/components/            shared UI and demo dashboard
-src/lib/supabase/          browser, server and proxy clients
-src/lib/demo-data.ts       fictional demo records
-supabase/schema.sql        database schema and RLS policies
+src/app/demo/              demonstração pública local
+src/app/dashboard/         aplicação autenticada
+src/app/api/stripe/        checkout e webhook
+src/components/demo/       interface modular da demonstração
+src/lib/demo-data.ts       estado e registros fictícios validados
+src/lib/supabase/          clientes de navegador, servidor e proxy
+supabase/schema.sql        schema e políticas RLS
 ```
 
-Built by [LipDev](https://lipdev.vercel.app).
+Desenvolvido por [LipDev](https://lipdev.vercel.app).
